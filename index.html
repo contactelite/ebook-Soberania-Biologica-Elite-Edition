@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soberania Biológica | Elite Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-blue: #00d4ff;
+            --dark-bg: #050a12;
+            --card-bg: #0d1624;
+            --text-white: #e0e0e0;
+            --accent-gold: #d4af37;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-white);
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.4;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 { font-family: 'Orbitron', sans-serif; text-transform: uppercase; }
+
+        /* HEADER & HERO COMPACTO */
+        header {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(rgba(5, 10, 18, 0.85), rgba(5, 10, 18, 0.95)), 
+                        url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=2070') no-repeat center center/cover;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .hero-content {
+            max-width: 850px;
+            width: 100%;
+        }
+
+        .hero-content h1 {
+            font-size: 2.8rem;
+            color: var(--primary-blue);
+            text-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+            margin-bottom: 5px;
+        }
+
+        .hero-content h3 {
+            font-size: 1.2rem;
+            color: var(--accent-gold);
+            margin-bottom: 15px;
+        }
+
+        .hero-content p {
+            font-size: 1rem;
+            max-width: 650px;
+            margin: 0 auto 15px;
+            opacity: 0.9;
+        }
+
+        /* Mockup Clicável */
+        .mockup-link {
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+        .mockup-link:hover {
+            transform: scale(1.02);
+        }
+
+        .mockup-img {
+            max-width: 320px;
+            height: auto;
+            filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.2));
+            cursor: pointer;
+        }
+
+        /* EFEITO PISCANDO/PULSANTE NO BOTÃO */
+        @keyframes pulse-glow {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 212, 255, 0.7); }
+            50% { transform: scale(1.05); box-shadow: 0 0 20px 10px rgba(0, 212, 255, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 212, 255, 0); }
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, var(--primary-blue), #0072ff);
+            color: white;
+            padding: 18px 40px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 50px;
+            font-size: 1rem;
+            display: inline-block;
+            margin-top: 15px;
+            text-transform: uppercase;
+            animation: pulse-glow 2s infinite ease-in-out; /* Animação aplicada aqui */
+            transition: 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.1);
+            filter: brightness(1.2);
+            animation: none; /* Para de pulsar ao passar o mouse para dar firmeza ao clique */
+        }
+
+        /* BOTÃO VOLTAR AO TOPO */
+        #backToTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-blue);
+            color: #000;
+            border: none;
+            border-radius: 50%;
+            font-weight: bold;
+            font-size: 20px;
+            cursor: pointer;
+            display: none;
+            z-index: 1000;
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+            transition: 0.3s;
+        }
+        #backToTop:hover { background: #fff; transform: translateY(-5px); }
+
+        /* OUTRAS SEÇÕES */
+        .scarcity { padding: 30px 20px; text-align: center; background: #000; border-top: 2px solid var(--primary-blue); }
+        #timer { font-size: 2rem; color: var(--accent-gold); font-family: 'Orbitron'; }
+
+        .features {
+            padding: 60px 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 212, 255, 0.1);
+        }
+
+        footer { padding: 30px; text-align: center; font-size: 0.8rem; color: #555; }
+
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 1.8rem; }
+            .mockup-img { width: 250px; }
+        }
+    </style>
+</head>
+<body id="top">
+
+    <header>
+        <div class="hero-content">
+            <h1>Soberania Biológica</h1>
+            <h3>Elite Edition</h3>
+            <p>O dossiê de biohacking para quem exige performance máxima. 126 páginas de pura ciência aplicada.</p>
+            
+            <a href="#checkout" class="mockup-link">
+                <img src="markup3d.png" alt="Ebook Soberania Biológica" class="mockup-img">
+            </a>
+            
+            <br>
+            <a href="https://pay.kirvano.com/d7246218-646b-40a8-afcc-ff1a40cae64b" class="cta-button">REIVINDICAR MINHA SOBERANIA</a>
+        </div>
+    </header>
+
+    <div class="scarcity">
+        <p>A oferta de lançamento de R$47,00 expira em:</p>
+        <div id="timer">15:00</div>
+    </div>
+
+    <section class="features">
+        <div class="feature-card">
+            <h3>Neurohacking</h3>
+            <p>Apague a névoa mental para um foco inquebrável.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Longevidade</h3>
+            <p>Ative a autofagia e gerencie as mitocôndrias.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Protocolo 90 Dias</h3>
+            <p>Plano estratégico para transformar sua biologia.</p>
+        </div>
+    </section>
+
+    <section id="checkout" style="text-align: center; padding: 60px 20px;">
+        <h2 style="margin-bottom: 20px;">Pronto para o Próximo Nível?</h2>
+        <p style="margin-bottom: 30px;">De <strike>R$97,00</strike> por apenas <strong style="color: var(--primary-blue); font-size: 1.8rem;">R$47,00</strong></p>
+        <a href="https://pay.kirvano.com/d7246218-646b-40a8-afcc-ff1a40cae64b" class="cta-button">COMPRAR AGORA - ACESSO IMEDIATO</a>
+        <p style="margin-top: 15px; font-size: 0.8rem; opacity: 0.6;">🔒 Compra Segura | Garantia de 7 Dias</p>
+    </section>
+
+    <button id="backToTop" onclick="window.scrollTo(0,0)" title="Voltar ao topo">↑</button>
+
+    <footer>
+        <p>&copy; 2026 Soberania Biológica - Elite Edition.</p>
+    </footer>
+
+    <script>
+        function startTimer(duration, display) {
+            var timer = duration, minutes, seconds;
+            setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+                display.textContent = (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
+                if (--timer < 0) timer = duration; 
+            }, 1000);
+        }
+
+        window.onscroll = function() {
+            var btn = document.getElementById("backToTop");
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        };
+
+        window.onload = function () {
+            startTimer(60 * 15, document.querySelector('#timer'));
+        };
+    </script>
+</body>
+</html>

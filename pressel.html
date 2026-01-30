@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificação de Acesso | Soberania Biológica</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <style>
+        <style>
+    :root {
+        --primary: #00d4ff;
+        --bg: #050a12;
+        --card: #0d1624;
+        --accent: #d4af37;
+    }
+
+    body {
+        /* Background inspirado no site principal */
+        background-color: var(--bg);
+        background-image: 
+            radial-gradient(circle at 50% 50%, rgba(0, 212, 255, 0.08) 0%, transparent 70%),
+            linear-gradient(rgba(5, 10, 18, 0.9), rgba(5, 10, 18, 0.9)),
+            url('https://www.transparenttextures.com/patterns/carbon-fibre.png'); /* Textura sutil tech */
+        color: #fff;
+        font-family: 'Inter', sans-serif;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        overflow: hidden;
+        padding: 20px;
+    }
+
+    /* Efeito de brilho neon no fundo */
+    body::before {
+        content: "";
+        position: absolute;
+        top: -10%;
+        left: -10%;
+        width: 40%;
+        height: 40%;
+        background: var(--primary);
+        filter: blur(150px);
+        opacity: 0.1;
+        z-index: -1;
+        animation: pulse-bg 8s infinite alternate;
+    }
+
+    @keyframes pulse-bg {
+        0% { transform: translate(0, 0); }
+        100% { transform: translate(20%, 20%); }
+    }
+
+    .container {
+        max-width: 450px;
+        width: 100%;
+        position: relative;
+        z-index: 1;
+    }
+
+    .header-status {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 0.7rem;
+        color: var(--primary);
+        letter-spacing: 3px;
+        margin-bottom: 25px;
+        text-transform: uppercase;
+        border-left: 2px solid var(--primary);
+        padding-left: 10px;
+    }
+
+    h1 {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 1.4rem;
+        line-height: 1.4;
+        margin-bottom: 30px;
+        text-transform: uppercase;
+    }
+
+    .highlight {
+        color: var(--primary);
+        text-shadow: 0 0 15px rgba(0, 212, 255, 0.6);
+    }
+
+    .quiz-box {
+        background: var(--card);
+        padding: 30px;
+        border-radius: 12px;
+        border: 1px solid rgba(0, 212, 255, 0.2);
+        box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+        backdrop-filter: blur(10px);
+    }
+
+    .option-btn {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(0, 212, 255, 0.1);
+        color: #fff;
+        padding: 18px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        margin-bottom: 12px;
+        width: 100%;
+        transition: all 0.3s ease;
+        font-family: 'Inter', sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .option-btn:hover {
+        background: var(--primary);
+        color: var(--bg);
+        box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+        transform: translateY(-2px);
+    }
+
+    .loader {
+        border: 2px solid rgba(0, 212, 255, 0.1);
+        border-top: 2px solid var(--primary);
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+        margin: 20px auto;
+        box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
+    }
+
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+    .footer-note {
+        margin-top: 40px;
+        font-size: 0.65rem;
+        color: rgba(255,255,255,0.3);
+        font-family: 'Orbitron', sans-serif;
+        letter-spacing: 2px;
+    }
+</style>
+
+
+<style>
+/* Container do Loading */
+.loading-screen {
+    display: none;
+    text-align: center;
+    padding: 20px;
+}
+
+/* O Disco Girando */
+.data-disc {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 25px;
+    border: 3px solid rgba(0, 212, 255, 0.1);
+    border-top: 3px solid var(--primary-blue, #00d4ff);
+    border-radius: 50%;
+    position: relative;
+    animation: spin 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+}
+
+.inner-circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    border: 1px dashed var(--primary-blue, #00d4ff);
+    border-radius: 50%;
+    opacity: 0.5;
+}
+
+/* Barra de Progresso Sutil */
+.progress-bar-container {
+    width: 200px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.05);
+    margin: 15px auto;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    width: 0%;
+    height: 100%;
+    background: var(--primary-blue, #00d4ff);
+    box-shadow: 0 0 10px var(--primary-blue, #00d4ff);
+    transition: width 0.4s ease;
+}
+
+#loading-text {
+    font-family: 'Orbitron', sans-serif; /* Mesma fonte do site principal */
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    color: var(--primary-blue, #00d4ff);
+    text-transform: uppercase;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+</style>
+
+<style>
+
+.footer-note {
+    margin-top: 40px; /* Espaçamento superior */
+    font-size: 0.65rem; /* Tamanho discreto para avisos legais */
+    color: rgba(255,255,255,0.3); /* Cor acinzentada para não distrair */
+    font-family: 'Orbitron', sans-serif; /* Fonte tecnológica do projeto */
+    letter-spacing: 2px; /* Espaçamento entre letras futurista */
+    
+    /* Propriedades de Centralização */
+    text-align: center; 
+    width: 100%;
+    display: block;
+}
+    </style>
+    
+    <style>
+
+/* Estilo para a Imagem de Destaque Ajustada */
+.markup-container {
+    width: 100%;
+    /* Reduzido de 400px para 280px para ficar mais discreto */
+    max-width: 250px; 
+    margin: 0 auto 20px;
+    position: relative;
+    animation: floating 3s ease-in-out infinite;
+}
+
+.main-markup {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    /* Brilho neon mais suave para combinar com o tamanho menor */
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.25); 
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    display: block;
+}
+
+@keyframes floating {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); } /* Flutuação leve */
+    100% { transform: translateY(0px); }
+}
+</style>
+
+
+<style>
+    /* Reset e Content Box */
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start; /* Melhor para scroll no mobile */
+        min-height: 100vh;
+        background-color: #050a12; /* Cor base do site */
+        overflow-x: hidden;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 360px; /* Largura padrão ideal para mobile */
+        margin: 0 auto;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Centraliza tudo horizontalmente */
+        text-align: center;
+    }
+
+    /* Ajuste da Imagem (Markup) */
+    .markup-container {
+        width: 70%; /* Tamanho reduzido para mobile */
+        max-width: 220px;
+        margin: 0 auto 15px auto;
+        display: flex;
+        justify-content: center;
+    }
+
+    .main-markup {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+    }
+
+    /* Ajuste de Texto e Botões */
+    h1 {
+        font-size: 1.2rem; /* Tamanho legível em telemóveis */
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .quiz-box {
+        width: 100%;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .option-btn {
+        width: 100%; /* Botões ocupam a largura total do container */
+        max-width: 300px;
+        margin-bottom: 10px;
+        padding: 15px;
+    }
+
+    /* Rodapé Centralizado */
+    .footer-note {
+        width: 100%;
+        text-align: center;
+        margin-top: auto; /* Empurra para o fim da página */
+        padding: 20px 0;
+    }
+    
+    
+    
+    /* Configuração da Barra de Rolagem (Scrollbar) Estilo Elite */
+::-webkit-scrollbar {
+    width: 8px; /* Largura da barra lateral */
+}
+
+/* Fundo da barra (Track) */
+::-webkit-scrollbar-track {
+    background: var(--dark-bg, #050a12); /* Cor de fundo idêntica ao site */
+}
+
+/* Parte móvel da barra (Thumb) */
+::-webkit-scrollbar-thumb {
+    background: var(--primary-blue, #00d4ff); /* Azul neon principal */
+    border-radius: 10px; /* Bordas arredondadas para um visual moderno */
+    border: 2px solid var(--dark-bg, #050a12); /* Cria um espaçamento elegante */
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.5); /* Efeito de brilho neon */
+}
+
+/* Efeito ao passar o mouse */
+::-webkit-scrollbar-thumb:hover {
+    background: #fff; /* Muda para branco para indicar interação */
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.8);
+}
+</style>    
+
+
+    
+    
+</head>
+
+
+<body>
+
+<div class="container" id="quiz-container">
+    <div class="header-status">Protocolo: Verificação de Perfil</div>
+    
+    <div class="markup-container">
+    <img src="3dMarkupModerno.png" alt="Protocolo Soberania Biológica" class="main-markup">
+</div>
+    
+    <div id="step1">
+        <h1>Sua biologia está configurada para <span class="highlight">Alta Performance</span> ou para o esgotamento?</h1>
+        <div class="quiz-box">
+            <span class="question-text">Você sofre com névoa mental ou falta de foco constante?</span>
+            <div class="options">
+                <button class="option-btn" onclick="nextStep(2)">Sim, frequentemente</button>
+                <button class="option-btn" onclick="nextStep(2)">Às vezes / Pouco</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="step2" style="display: none;">
+        <h1>Acesso à <span class="highlight">Elite Edition</span> requer compromisso com o protocolo.</h1>
+        <div class="quiz-box">
+            <span class="question-text">Você está disposto a seguir estratégias científicas para otimizar seus resultados?</span>
+            <div class="options">
+                <button class="option-btn" onclick="finish()">Sim, estou pronto</button>
+                <button class="option-btn" onclick="finish()">Quero saber mais</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="loading" class="loading-screen">
+        <div class="loader">
+        <div class="data-disc">
+        <div class="inner-circle"></div>
+        <div class="scanning-line"></div>
+    </div>
+        
+        </div>
+        <p id="loading-text">Analisando compatibilidade...</p>
+        <div class="progress-bar-container">
+        <div class="progress-bar-fill" id="pb-fill"></div>
+    </div>
+    </div>
+
+    <div class="footer-note">Soberania Biológica © 2026 | Acesso Restrito</div>
+</div>
+
+<script>
+    function nextStep(step) {
+        document.getElementById('step1').style.display = 'none';
+        document.getElementById('step2').style.display = 'block';
+    }
+
+    function finish() {
+        document.getElementById('step2').style.display = 'none';
+        document.getElementById('loading').style.display = 'block';
+        
+        const messages = [
+            "Sincronizando algoritmos...",
+            "Validando acesso autorizado...",
+            "Redirecionando para o Dossiê Elite..."
+        ];
+        
+        let i = 0;
+        const interval = setInterval(() => {
+            if(i < messages.length) {
+                document.getElementById('loading-text').innerText = messages[i];
+                i++;
+            } else {
+                clearInterval(interval);
+                // INSIRA O LINK DA SUA PÁGINA DE VENDAS ABAIXO
+                window.location.href = "https://soberaniabiologica.com.br/"; 
+            }
+        }, 1000);
+    }
+
+
+/* ADICIONE ESTE SCRIPT NO FINAL DO SEU HTML, ANTES DO body*/
+
+const flow = {
+    currentStep: 1,
+    responses: [],
+    
+    // 1. Efeito de som sutil ao clicar (opcional)
+    playTick: () => {
+        const audio = new Audio('https://www.soundjay.com/buttons/button-50.mp3');
+        audio.volume = 0.2;
+        audio.play().catch(() => {}); // Ignora erro se o navegador bloquear
+    },
+
+    // 2. Transição suave entre perguntas
+    nextStep: (step) => {
+        flow.playTick();
+        const currentDiv = document.getElementById(`step${flow.currentStep}`);
+        const nextDiv = document.getElementById(`step${step}`);
+        
+        // Efeito de Fade Out
+        currentDiv.style.opacity = '0';
+        currentDiv.style.transition = '0.3s';
+        
+        setTimeout(() => {
+            currentDiv.style.display = 'none';
+            nextDiv.style.display = 'block';
+            nextDiv.style.opacity = '0';
+            
+            // Efeito de Fade In
+            setTimeout(() => {
+                nextDiv.style.opacity = '1';
+                flow.currentStep = step;
+            }, 50);
+        }, 300);
+    },
+
+    // 3. Simulação de processamento de dados (Matrix Style)
+    finish: () => {
+        flow.playTick();
+        document.getElementById(`step${flow.currentStep}`).style.display = 'none';
+        const loading = document.getElementById('loading');
+        loading.style.display = 'block';
+        
+        const statusText = document.getElementById('loading-text');
+        const stages = [
+            { text: "ANALISANDO BIOMETRIA COGNITIVA...", time: 800 },
+            { text: "IDENTIFICANDO PADRÕES DE CORTISOL...", time: 1200 },
+            { text: "VERIFICANDO DISPONIBILIDADE DO DOSSIÊ...", time: 1000 },
+            { text: "ACESSO CONCEDIDO: REDIRECIONANDO...", time: 800 }
+        ];
+
+        let totalTime = 0;
+        stages.forEach((stage, index) => {
+            setTimeout(() => {
+                statusText.innerText = stage.text;
+                statusText.style.color = "#00d4ff";
+                if(index === stages.length - 1) {
+                    // REDIRECIONAMENTO FINAL
+                    setTimeout(() => {
+                        window.location.href = "https://soberaniabiologica.com.br/";
+                    }, 1000);
+                }
+            }, totalTime);
+            totalTime += stage.time;
+        });
+    }
+};
+
+// 4. Bloqueio de clique direito (para passar uma sensação de sistema fechado/seguro)
+document.addEventListener('contextmenu', event => event.preventDefault());
+
+
+function finish() {
+    // Esconde o último passo do quiz e mostra o loading
+    document.getElementById('step2').style.display = 'none';
+    document.getElementById('loading').style.display = 'block';
+    
+    const messages = [
+        { text: "Cruzando dados genéticos...", p: 25 },
+        { text: "Mapeando neurotransmissores...", p: 50 },
+        { text: "Sincronizando Dossiê Elite...", p: 85 },
+        { text: "Acesso Liberado!", p: 100 }
+    ];
+    
+    let step = 0;
+    const interval = setInterval(() => {
+        if (step < messages.length) {
+            document.getElementById('loading-text').innerText = messages[step].text;
+            document.getElementById('pb-fill').style.width = messages[step].p + "%";
+            step++;
+        } else {
+            clearInterval(interval);
+            // Redireciona para o link de checkout da Kirvano
+            window.location.href = "https://soberaniabiologica.com.br/";
+        }
+    }, 1200); // Velocidade do carregamento
+}
+
+
+</script>
+</body>
+</html>

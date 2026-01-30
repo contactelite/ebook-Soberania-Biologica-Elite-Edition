@@ -155,6 +155,159 @@
             .hero-content h1 { font-size: 1.8rem; }
             .mockup-img { width: 250px; }
         }
+        
+ /* TESTIMONIALS CAROUSEL */
+.testimonials-section {
+    padding: 60px 20px;
+    text-align: center;
+    background: rgba(0, 212, 255, 0.02);
+    overflow: hidden; /* Garante que nada saia da tela */
+}
+
+.testimonials-section h2 {
+    margin-bottom: 40px;
+    font-size: 1.5rem;
+    color: var(--primary-blue);
+}
+
+.carousel-container {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 20px;
+    padding: 20px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    /* Centraliza os cards quando não há scroll */
+    justify-content: start; 
+}
+
+/* Centralização em telas desktop */
+@media (min-width: 1024px) {
+    .carousel-container {
+        justify-content: center;
+    }
+}
+
+.carousel-container::-webkit-scrollbar {
+    display: none;
+}
+
+.testimonial-card {
+    min-width: 300px;
+    flex: 0 0 300px;
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 15px;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-blue);
+}
+
+.testimonial-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    border: 2px solid var(--primary-blue);
+    object-fit: cover;
+}
+
+.testimonial-card p {
+    font-style: italic;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    opacity: 0.8;
+}
+
+.testimonial-card span {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+    color: var(--accent-gold);
+    font-size: 0.8rem;
+}
+
+
+/* FAQ SECTION */
+.faq-section {
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 0 20px;
+}
+
+.faq-section h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    color: var(--primary-blue);
+    font-size: 1.8rem;
+}
+
+.faq-item {
+    background: var(--card-bg);
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 212, 255, 0.1);
+    overflow: hidden;
+}
+
+.faq-question {
+    width: 100%;
+    padding: 20px;
+    background: none;
+    border: none;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.3s;
+}
+
+.faq-question:hover {
+    background: rgba(0, 212, 255, 0.05);
+}
+
+.faq-question::after {
+    content: '+';
+    color: var(--accent-gold);
+    font-size: 1.5rem;
+    font-family: 'Orbitron';
+}
+
+.faq-item.active .faq-question::after {
+    content: '-';
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.faq-answer p {
+    padding: 20px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #ccc;
+}
+
+.faq-item.active .faq-answer {
+    max-height: 200px; /* Ajuste conforme o tamanho do texto */
+}
+
+
+
     </style>
 </head>
 <body id="top">
@@ -193,6 +346,75 @@
             <p>Plano estratégico para transformar sua biologia.</p>
         </div>
     </section>
+    
+    <section class="testimonials-section">
+    <h2>Resultados de Elite</h2>
+    <div class="carousel-container">
+        <div class="testimonial-card">
+            <img src="https://i.pravatar.cc/150?u=marcos" alt="Marcos Silva" class="testimonial-img">
+            <p>"O protocolo de neurohacking mudou meu jogo. Minha produtividade no trabalho dobrou e a névoa mental sumiu em 2 semanas."</p>
+            <span>— Marcos Silva, Engenheiro</span>
+        </div>
+
+        <div class="testimonial-card">
+            <img src="https://i.pravatar.cc/150?u=carla" alt="Dra. Carla Mendes" class="testimonial-img">
+            <p>"Como médico, sou criterioso. O conteúdo sobre mitocôndrias e autofagia é baseado em ciência sólida. Recomendo."</p>
+            <span>— Dr. Carlo Mendes</span>
+        </div>
+
+        <div class="testimonial-card">
+            <img src="https://i.pravatar.cc/150?u=ricardo" alt="Ricardo Alves" class="testimonial-img">
+            <p>"O Protocolo 90 Dias é o que eu precisava para organizar minha rotina. Sinto-me 10 anos mais jovem e com energia constante."</p>
+            <span>— Ricardo Alves, Empresário</span>
+        </div>
+    </div>
+    <p style="font-size: 0.7rem; opacity: 0.5; margin-top: 10px;"></p>
+    
+    <section class="faq-section">
+    <h2>Perguntas Frequentes</h2>
+
+    <div class="faq-item">
+        <button class="faq-question">O conteúdo é difícil de entender?</button>
+        <div class="faq-answer">
+            <p>Não. Embora seja baseado em ciência avançada, o guia foi escrito de forma prática. Você terá protocolos passo a passo para aplicar imediatamente, sem precisar de formação na área da saúde.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question">Em quanto tempo verei resultados?</button>
+        <div class="faq-answer">
+            <p>Os efeitos do Neurohacking (foco e clareza) costumam ser sentidos nos primeiros 7 a 14 dias. Mudanças biológicas profundas e longevidade são consolidadas ao longo do Protocolo de 90 Dias.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question">Preciso comprar suplementos caros?</button>
+        <div class="faq-answer">
+            <p>O foco principal está em otimizações de estilo de vida, luz, sono e alimentação. Sugerimos suplementos específicos, mas eles são opcionais e servem para acelerar o processo.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question">Como recebo o acesso ao produto?</button>
+        <div class="faq-answer">
+            <p>O acesso é imediato. Assim que o pagamento for confirmado, você receberá um e-mail com o link para download do dossiê digital (PDF).</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question">Existe alguma garantia?</button>
+        <div class="faq-answer">
+            <p>Sim. Oferecemos uma garantia incondicional de 7 dias. Se você sentir que o conteúdo não é para você, basta solicitar o reembolso total.</p>
+        </div>
+    </div>
+</section>
+    
+    
+    
+</section>
+
+    
+    
 
     <section id="checkout" style="text-align: center; padding: 60px 20px;">
         <h2 style="margin-bottom: 20px;">Pronto para o Próximo Nível?</h2>
@@ -230,6 +452,55 @@
         window.onload = function () {
             startTimer(60 * 15, document.querySelector('#timer'));
         };
+        
+        
+        function startCarouselAutoScroll() {
+    const container = document.querySelector('.carousel-container');
+    let scrollAmount = 0;
+    const scrollStep = 1; // Velocidade do movimento
+    const delay = 30; // Suavidade (ms)
+
+    function step() {
+        // Se o usuário estiver interagindo (mouse em cima), pausa o movimento
+        if (!isPaused) {
+            container.scrollLeft += scrollStep;
+            
+            // Se chegou ao fim, volta suavemente para o início
+            if (container.scrollLeft >= (container.scrollWidth - container.clientWidth)) {
+                container.scrollLeft = 0;
+            }
+        }
+        requestAnimationFrame(step);
+    }
+
+    let isPaused = false;
+    container.addEventListener('mouseenter', () => isPaused = true);
+    container.addEventListener('mouseleave', () => isPaused = false);
+    container.addEventListener('touchstart', () => isPaused = true);
+    container.addEventListener('touchend', () => isPaused = false);
+
+    requestAnimationFrame(step);
+}
+
+// Inicie a função junto com o carregamento da página
+window.addEventListener('load', startCarouselAutoScroll);
+
+
+
+// Lógica do FAQ Acordeão
+document.querySelectorAll('.faq-question').forEach(button => {
+    button.addEventListener('click', () => {
+        const faqItem = button.parentElement;
+        
+        // Fecha outros itens abertos (opcional, para foco único)
+        document.querySelectorAll('.faq-item').forEach(item => {
+            if (item !== faqItem) item.classList.remove('active');
+        });
+
+        faqItem.classList.toggle('active');
+    });
+});
+         
     </script>
 </body>
 </html>

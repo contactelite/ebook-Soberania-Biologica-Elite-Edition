@@ -18,7 +18,7 @@
 </script>
   
     
-    
+ 
     <style>
         :root {
     --primary-blue: #00d4ff;
@@ -523,9 +523,124 @@ p {
 .floating-control.active #backToTop { display: block; }
 .floating-control.active .access-badge { opacity: 1; }
 
+/* BANNER DE COOKIES - ESTILO ELITE */
+#cookie-alert-system {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(150%); /* Começa escondido abaixo */
+    width: 90%;
+    max-width: 500px;
+    background: rgba(13, 22, 36, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--primary-blue);
+    border-radius: 12px;
+    padding: 20px;
+    z-index: 9999;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), 0 0 15px rgba(0, 212, 255, 0.2);
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#cookie-alert-system.active {
+    transform: translateX(-50%) translateY(0);
+}
+
+.cookie-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.7rem;
+    color: var(--primary-blue);
+    letter-spacing: 1px;
+}
+
+.cookie-header .dot {
+    width: 8px;
+    height: 8px;
+    background: var(--primary-blue);
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+}
+
+.cookie-body p {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    color: #ccc;
+    line-height: 1.4;
+}
+
+.cookie-footer {
+    display: flex;
+    gap: 10px;
+}
+
+.cookie-btn {
+    flex: 1;
+    padding: 10px;
+    border-radius: 5px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.65rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+
+.accept-btn {
+    background: var(--primary-blue);
+    color: #050a12;
+    border: none;
+}
+
+.accept-btn:hover {
+    background: #fff;
+    box-shadow: 0 0 15px var(--primary-blue);
+}
+
+.decline-btn {
+    background: transparent;
+    color: #555;
+    border: 1px solid #333;
+}
+
+.decline-btn:hover {
+    color: #fff;
+    border-color: #666;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(1.2); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
     </style>
 </head>
 <body id="top">
+
+
+<div id="cookie-alert-system">
+    <div class="cookie-header">
+        <div class="dot"></div>
+        <span>PROTOCOL: DATA_CONSENT_2026</span>
+    </div>
+    <div class="cookie-body">
+        <p>Este sistema utiliza cookies para otimizar sua navegação e sincronizar os algoritmos de biohacking com sua experiência.</p>
+    </div>
+    <div class="cookie-footer">
+        <button class="cookie-btn decline-btn" onclick="closeCookieBanner()">Rejeitar</button>
+        <button class="cookie-btn accept-btn" onclick="acceptCookie()">Aceitar Termos</button>
+    </div>
+    </div>
+</div>
+
+
+
+
 
     <header>
         <div class="hero-content">
@@ -709,6 +824,10 @@ E-mail Marketing: Seu e-mail será usado para enviar o acesso ao produto e, ocas
     <button id="backToTop" onclick="window.scrollTo(0,0)" title="Voltar ao topo">↑</button>
     <div id="accessBadge" class="access-badge">SISTEMA: ACESSO AUTORIZADO</div>
 </div>
+
+
+
+
 
    
     <script>
@@ -911,9 +1030,33 @@ function showAccessToast() {
 }
 
 
+function acceptCookie() {
+    // Salva apenas para a sessão atual
+    sessionStorage.setItem('elite_cookie_session', 'granted');
+    closeCookieBanner();
+}
 
+function closeCookieBanner() {
+    document.getElementById('cookie-alert-system').classList.remove('active');
+}
 
+window.addEventListener('load', () => {
+    // Verifica se já aceitou NESTA SESSÃO (aba aberta)
+    const alreadyAccepted = sessionStorage.getItem('elite_cookie_session');
+
+    if (!alreadyAccepted) {
+        setTimeout(() => {
+            const banner = document.getElementById('cookie-alert-system');
+            if(banner) banner.classList.add('active');
+        }, 2000); // 2 segundos para aparecer
+    }
+});
          
     </script>
+    
+    
+</div>
+
+
 </body>
 </html>

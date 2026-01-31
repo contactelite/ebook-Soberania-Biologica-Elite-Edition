@@ -9,54 +9,47 @@
         <style>
     :root {
         --primary: #00d4ff;
-        --bg: #050a12;
-        --card: #0d1624;
-        --accent: #d4af37;
+        --bg-fallback: #050a12; /* Cor de segurança caso a imagem falhe */
     }
 
     body {
-        /* Background inspirado no site principal */
-        background-color: var(--bg);
-        background-image: 
-            radial-gradient(circle at 50% 50%, rgba(0, 212, 255, 0.08) 0%, transparent 70%),
-            linear-gradient(rgba(5, 10, 18, 0.9), rgba(5, 10, 18, 0.9)),
-            url('https://www.transparenttextures.com/patterns/carbon-fibre.png'); /* Textura sutil tech */
-        color: #fff;
-        font-family: 'Inter', sans-serif;
         margin: 0;
+        padding: 0;
+        min-height: 100vh;
         display: flex;
         align-items: center;
         justify-content: center;
-        min-height: 100vh;
-        overflow: hidden;
-        padding: 20px;
+        font-family: 'Inter', sans-serif;
+        color: #fff;
+
+        /* CONFIGURAÇÃO DA IMAGEM EXTERNA */
+        background-color: var(--bg-fallback); 
+        background-image: url('background-transp-pressel.png'); /* COLOQUE O LINK AQUI */
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover; /* Faz a imagem ocupar a tela toda sem esticar */
+        background-attachment: fixed; /* Efeito parallax: o fundo fica parado */
     }
 
-    /* Efeito de brilho neon no fundo */
+    /* Camada de transparência para garantir leitura do texto */
     body::before {
         content: "";
-        position: absolute;
-        top: -10%;
-        left: -10%;
-        width: 40%;
-        height: 40%;
-        background: var(--primary);
-        filter: blur(150px);
-        opacity: 0.1;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(5, 10, 18, 0.6); /* Ajuste o 0.6 para mais ou menos transparência */
         z-index: -1;
-        animation: pulse-bg 8s infinite alternate;
-    }
-
-    @keyframes pulse-bg {
-        0% { transform: translate(0, 0); }
-        100% { transform: translate(20%, 20%); }
     }
 
     .container {
-        max-width: 450px;
-        width: 100%;
         position: relative;
         z-index: 1;
+        width: 100%;
+        max-width: 400px;
+        padding: 20px;
+        text-align: center;
     }
 
     .header-status {

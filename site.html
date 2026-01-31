@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soberania Biológica | Elite Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+  
+  
+ 
+    <style>
+        :root {
+    --primary-blue: #00d4ff;
+    --dark-bg: #050a12;
+    --card-bg: #0d1624;
+    --text-white: #e0e0e0;
+    --accent-gold: #d4af37;
+    /* Novas variáveis de tipografia */
+    --font-main: 'Inter', sans-serif;
+    --font-tech: 'Orbitron', sans-serif;
+}
+
+body {
+    background-color: var(--dark-bg);
+    color: var(--text-white);
+    font-family: var(--font-main); /* Fonte mais limpa para leitura */
+    line-height: 1.6; /* Aumentado para não embolar as linhas */
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+    font-family: var(--font-tech);
+    text-transform: uppercase;
+    letter-spacing: 2px; /* Espaçamento para visual futurista legível */
+    font-weight: 700;
+    color: #fff;
+}
+
+/* Melhorando a visualização dos parágrafos */
+p {
+    font-weight: 300;
+    color: rgba(224, 224, 224, 0.85); /* Cinza claro para não agredir os olhos */
+    margin-bottom: 1.2rem;
+}
+
+/* Destaque para o Badge de Acesso Autorizado */
+.access-badge {
+    font-family: var(--font-tech);
+    font-weight: 500;
+    font-size: 8px;
+    letter-spacing: 1.5px;
+    color: var(--primary-blue);
+    text-shadow: 0 0 5px rgba(0, 212, 255, 0.5);
+}
+
+/* Melhoria no FAQ e Modais para leitura rápida */
+.faq-question, .modal-content h2 {
+    font-family: var(--font-tech);
+    font-size: 1rem;
+}
+
+.faq-answer p, .modal-content p {
+    font-family: var(--font-main);
+    font-size: 0.95rem;
+    line-height: 1.8;
+}
+
+        /* HEADER & HERO COMPACTO */
+        header {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(rgba(5, 10, 18, 0.85), rgba(5, 10, 18, 0.95)), 
+                        url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=2070') no-repeat center center/cover;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .hero-content {
+            max-width: 850px;
+            width: 100%;
+        }
+
+        .hero-content h1 {
+            font-size: 2.8rem;
+            color: var(--primary-blue);
+            text-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+            margin-bottom: 5px;
+        }
+
+        .hero-content h3 {
+            font-size: 1.2rem;
+            color: var(--accent-gold);
+            margin-bottom: 15px;
+        }
+
+        .hero-content p {
+            font-size: 1rem;
+            max-width: 650px;
+            margin: 0 auto 15px;
+            opacity: 0.9;
+        }
+
+        /* Mockup Clicável */
+        .mockup-link {
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+        .mockup-link:hover {
+            transform: scale(1.02);
+        }
+
+        .mockup-img {
+            max-width: 320px;
+            height: auto;
+            filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.2));
+            cursor: pointer;
+        }
+
+        /* EFEITO PISCANDO/PULSANTE NO BOTÃO */
+        @keyframes pulse-glow {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 212, 255, 0.7); }
+            50% { transform: scale(1.05); box-shadow: 0 0 20px 10px rgba(0, 212, 255, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 212, 255, 0); }
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, var(--primary-blue), #0072ff);
+            color: white;
+            padding: 18px 40px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 50px;
+            font-size: 1rem;
+            display: inline-block;
+            margin-top: 15px;
+            text-transform: uppercase;
+            animation: pulse-glow 2s infinite ease-in-out; /* Animação aplicada aqui */
+            transition: 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.1);
+            filter: brightness(1.2);
+            animation: none; /* Para de pulsar ao passar o mouse para dar firmeza ao clique */
+        }
+
+        /* BOTÃO VOLTAR AO TOPO */
+        #backToTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-blue);
+            color: #000;
+            border: none;
+            border-radius: 50%;
+            font-weight: bold;
+            font-size: 20px;
+            cursor: pointer;
+            display: none;
+            z-index: 1000;
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+            transition: 0.3s;
+        }
+        #backToTop:hover { background: #fff; transform: translateY(-5px); }
+
+        /* OUTRAS SEÇÕES */
+        .scarcity { padding: 30px 20px; text-align: center; background: #000; border-top: 2px solid var(--primary-blue); }
+        #timer { font-size: 2rem; color: var(--accent-gold); font-family: 'Orbitron'; }
+
+        .features {
+            padding: 60px 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 212, 255, 0.1);
+        }
+
+        footer { padding: 30px; text-align: center; font-size: 0.8rem; color: #555; }
+
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 1.8rem; }
+            .mockup-img { width: 250px; }
+        }
+        
+ /* TESTIMONIALS CAROUSEL */
+.testimonials-section {
+    padding: 60px 20px;
+    text-align: center;
+    background: rgba(0, 212, 255, 0.02);
+    overflow: hidden; /* Garante que nada saia da tela */
+}
+
+.testimonials-section h2 {
+    margin-bottom: 40px;
+    font-size: 1.5rem;
+    color: var(--primary-blue);
+}
+
+.carousel-container {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 20px;
+    padding: 20px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    /* Centraliza os cards quando não há scroll */
+    justify-content: start; 
+}
+
+/* Centralização em telas desktop */
+@media (min-width: 1024px) {
+    .carousel-container {
+        justify-content: center;
+    }
+}
+
+.carousel-container::-webkit-scrollbar {
+    display: none;
+}
+
+.testimonial-card {
+    min-width: 300px;
+    flex: 0 0 300px;
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 15px;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-blue);
+}
+
+.testimonial-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    border: 2px solid var(--primary-blue);
+    object-fit: cover;
+}
+
+.testimonial-card p {
+    font-style: italic;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    opacity: 0.8;
+}
+
+.testimonial-card span {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+    color: var(--accent-gold);
+    font-size: 0.8rem;
+}
+
+
+/* FAQ SECTION */
+.faq-section {
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 0 20px;
+}
+
+.faq-section h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    color: var(--primary-blue);
+    font-size: 1.8rem;
+}
+
+.faq-item {
+    background: var(--card-bg);
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 212, 255, 0.1);
+    overflow: hidden;
+}
+
+.faq-question {
+    width: 100%;
+    padding: 20px;
+    background: none;
+    border: none;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.3s;
+}
+
+.faq-question:hover {
+    background: rgba(0, 212, 255, 0.05);
+}
+
+.faq-question::after {
+    content: '+';
+    color: var(--accent-gold);
+    font-size: 1.5rem;
+    font-family: 'Orbitron';
+}
+
+.faq-item.active .faq-question::after {
+    content: '-';
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.faq-answer p {
+    padding: 20px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #ccc;
+}
+
+.faq-item.active .faq-answer {
+    max-height: 200px; /* Ajuste conforme o tamanho do texto */
+}
+
+
+.footer-simple {
+    padding: 40px 20px;
+    text-align: center;
+    background-color: var(--dark-bg);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-copy {
+    font-size: 0.85rem;
+    color: #666;
+    letter-spacing: 0.5px;
+}
+
+/* MODAL STYLES */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 2000; 
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(5, 10, 18, 0.9);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background-color: var(--card-bg);
+    margin: 5% auto;
+    padding: 30px;
+    border: 1px solid var(--primary-blue);
+    width: 80%;
+    max-width: 700px;
+    border-radius: 15px;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.close-modal {
+    color: var(--accent-gold);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.modal-content h2 { color: var(--primary-blue); margin-bottom: 20px; font-size: 1.2rem; }
+.modal-content p, .modal-content li { font-size: 0.9rem; line-height: 1.6; margin-bottom: 10px; color: #ccc; }
+.modal-content ul { padding-left: 20px; margin-bottom: 15px; }
+
+/* Custom Scrollbar para o Modal */
+.modal-content::-webkit-scrollbar { width: 5px; }
+.modal-content::-webkit-scrollbar-thumb { background: var(--primary-blue); border-radius: 10px; }
+
+
+
+/* BOTÃO CTA REVISADO */
+.cta-button {
+    background: linear-gradient(45deg, #00d4ff, #0072ff);
+    color: #fff;
+    padding: 20px 45px;
+    text-decoration: none;
+    font-weight: 900;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    display: inline-block;
+    margin-top: 15px;
+    text-transform: uppercase;
+    box-shadow: 0 4px 15px rgba(0, 212, 255, 0.4);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: pulse-glow 2s infinite ease-in-out;
+    border: none;
+    cursor: pointer;
+}
+
+.cta-button:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 30px rgba(0, 212, 255, 0.6);
+    filter: brightness(1.1);
+    animation: none;
+}
+
+/* Custom Scrollbar para o Modal (Efeito Elite) */
+.modal-content::-webkit-scrollbar { 
+    width: 4px; 
+}
+.modal-content::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+.modal-content::-webkit-scrollbar-thumb { 
+    background: var(--primary-blue); 
+    border-radius: 10px; 
+}
+
+/* Garante que o conteúdo role suavemente via script */
+.modal-content {
+    scroll-behavior: smooth;
+}
+
+.typewriter-cursor::after {
+    content: '|';
+    animation: blink 0.7s infinite;
+    color: var(--accent-gold);
+    margin-left: 5px;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+
+/* Container que segura o botão e o texto */
+.floating-control {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    z-index: 1000;
+    pointer-events: none; /* Garante que não atrapalhe cliques fora do botão */
+}
+
+/* Botão de Voltar ao Topo */
+#backToTop {
+    pointer-events: auto; /* Reativa o clique apenas no botão */
+    background: var(--card-bg);
+    color: var(--primary-blue);
+    border: 1px solid var(--primary-blue);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+    transition: all 0.3s ease;
+    display: none; /* O JS controla a exibição no scroll */
+}
+
+#backToTop:hover {
+    background: var(--primary-blue);
+    color: var(--dark-bg);
+    transform: translateY(-3px);
+}
+
+/* Texto de Autorização abaixo do botão */
+.access-badge {
+    pointer-events: none;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 9px;
+    color: var(--primary-blue);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    white-space: nowrap;
+    opacity: 0; /* Começa invisível */
+    transition: opacity 0.3s ease;
+}
+
+/* Mostra o texto apenas quando o botão aparecer */
+.floating-control.active #backToTop { display: block; }
+.floating-control.active .access-badge { opacity: 1; }
+
+/* BANNER DE COOKIES - ESTILO ELITE */
+#cookie-alert-system {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(150%); /* Começa escondido abaixo */
+    width: 90%;
+    max-width: 500px;
+    background: rgba(13, 22, 36, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--primary-blue);
+    border-radius: 12px;
+    padding: 20px;
+    z-index: 9999;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), 0 0 15px rgba(0, 212, 255, 0.2);
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#cookie-alert-system.active {
+    transform: translateX(-50%) translateY(0);
+}
+
+.cookie-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.7rem;
+    color: var(--primary-blue);
+    letter-spacing: 1px;
+}
+
+.cookie-header .dot {
+    width: 8px;
+    height: 8px;
+    background: var(--primary-blue);
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+}
+
+.cookie-body p {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    color: #ccc;
+    line-height: 1.4;
+}
+
+.cookie-footer {
+    display: flex;
+    gap: 10px;
+}
+
+.cookie-btn {
+    flex: 1;
+    padding: 10px;
+    border-radius: 5px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.65rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+
+.accept-btn {
+    background: var(--primary-blue);
+    color: #050a12;
+    border: none;
+}
+
+.accept-btn:hover {
+    background: #fff;
+    box-shadow: 0 0 15px var(--primary-blue);
+}
+
+.decline-btn {
+    background: transparent;
+    color: #555;
+    border: 1px solid #333;
+}
+
+.decline-btn:hover {
+    color: #fff;
+    border-color: #666;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(1.2); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+    </style>
+</head>
+<body id="top">
+
+
+<div id="cookie-alert-system">
+    <div class="cookie-header">
+        <div class="dot"></div>
+        <span>PROTOCOL: DATA_CONSENT_2026</span>
+    </div>
+    <div class="cookie-body">
+        <p>Este sistema utiliza cookies para otimizar sua navegação e sincronizar os algoritmos de biohacking com sua experiência.</p>
+    </div>
+    <div class="cookie-footer">
+        <button class="cookie-btn decline-btn" onclick="closeCookieBanner()">Rejeitar</button>
+        <button class="cookie-btn accept-btn" onclick="acceptCookie()">Aceitar Termos</button>
+    </div>
+    </div>
+</div>
+
+
+
+
+
+    <header>
+        <div class="hero-content">
+            <h1>Soberania Biológica(Biohacking)</h1>
+            <h2>Elite Edition</h2>
+            <p>O dossiê de biohacking para quem exige performance máxima. 126 páginas de pura ciência aplicada.</p>
+            
+            <a href="#checkout" class="mockup-link">
+                <img src="3dMarkupModerno.png" alt="Ebook Soberania Biológica" class="mockup-img">
+            </a>
+            
+            <br>
+            <a href="https://pay.kirvano.com/d7246218-646b-40a8-afcc-ff1a40cae64b" class="cta-button">REIVINDICAR MINHA SOBERANIA</a>
+        </div>
+    </header>
+
+    <div class="scarcity">
+        <p>A oferta de lançamento de R$47,00 expira em:</p>
+        <div id="timer">15:00</div>
+    </div>
+
+    <section class="features">
+        <div class="feature-card">
+            <h3>Neurohacking</h3>
+            <p>Apague a névoa mental para um foco inquebrável.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Longevidade</h3>
+            <p>Ative a autofagia e gerencie as mitocôndrias.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Protocolo 90 Dias</h3>
+            <p>Plano estratégico para transformar sua biologia.</p>
+        </div>
+    </section>
+    
+    <section class="testimonials-section">
+    <h2>Resultados de Elite</h2>
+    <div class="carousel-container">
+        <div class="testimonial-card">
+            <img src="https://i.pravatar.cc/150?u=marcos" alt="Marcos Silva" class="testimonial-img">
+            <p>"O protocolo de neurohacking mudou meu jogo. Minha produtividade no trabalho dobrou e a névoa mental sumiu em 2 semanas."</p>
+            <span>— Marcos Silva, Engenheiro</span>
+        </div>
+
+        <div class="testimonial-card">
+            <img src="https://i.pravatar.cc/150?u=carla" alt="Dra. Carla Mendes" class="testimonial-img">
+            <p>"Como médico, sou criterioso. O conteúdo sobre mitocôndrias e autofagia é baseado em ciência sólida. Recomendo."</p>
+            <span>— Dr. Carlo Mendes</span>
+        </div>
+
+        <div class="testimonial-card">
+            <img src="https://i.pravatar.cc/150?u=ricardo" alt="Ricardo Alves" class="testimonial-img">
+            <p>"O Protocolo 90 Dias é o que eu precisava para organizar minha rotina. Sinto-me 10 anos mais jovem e com energia constante."</p>
+            <span>— Ricardo Alves, Empresário</span>
+        </div>
+    </div>
+    <p style="font-size: 0.7rem; opacity: 0.5; margin-top: 10px;"></p>
+    
+    <section class="faq-section">
+    <h2>Perguntas Frequentes</h2>
+
+    <div class="faq-item">
+        <button class="faq-question">O conteúdo é difícil de entender?</button>
+        <div class="faq-answer">
+            <p>Não. Embora seja baseado em ciência avançada, o guia foi escrito de forma prática. Você terá protocolos passo a passo para aplicar imediatamente, sem precisar de formação na área da saúde.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question">Em quanto tempo verei resultados?</button>
+        <div class="faq-answer">
+            <p>Os efeitos do Neurohacking (foco e clareza) costumam ser sentidos nos primeiros 7 a 14 dias. Mudanças biológicas profundas e longevidade são consolidadas ao longo do Protocolo de 90 Dias.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question">Preciso comprar suplementos caros?</button>
+        <div class="faq-answer">
+            <p>O foco principal está em otimizações de estilo de vida, luz, sono e alimentação. Sugerimos suplementos específicos, mas eles são opcionais e servem para acelerar o processo.</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question">Como recebo o acesso ao produto?</button>
+        <div class="faq-answer">
+            <p>O acesso é imediato. Assim que o pagamento for confirmado, você receberá um e-mail com o link para download do dossiê digital (PDF).</p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question">Existe alguma garantia?</button>
+        <div class="faq-answer">
+            <p>Sim. Oferecemos uma garantia incondicional de 7 dias. Se você sentir que o conteúdo não é para você, basta solicitar o reembolso total.</p>
+        </div>
+    </div>
+</section>
+    
+    
+    
+</section>
+
+    
+    
+
+    <section id="checkout" style="text-align: center; padding: 60px 20px;">
+        <h2 style="margin-bottom: 20px;">Pronto para o Próximo Nível?</h2>
+        <p style="margin-bottom: 30px;">De <strike>R$97,00</strike> por apenas <strong style="color: var(--primary-blue); font-size: 1.8rem;">R$47,00</strong></p>
+        <a href="https://pay.kirvano.com/d7246218-646b-40a8-afcc-ff1a40cae64b" class="cta-button">COMPRAR AGORA - ACESSO IMEDIATO</a>
+        <p style="margin-top: 15px; font-size: 0.8rem; opacity: 0.6;">🔒 Compra Segura | Garantia de 7 Dias</p>
+    </section>
+
+    <button id="backToTop" onclick="window.scrollTo(0,0)" title="Voltar ao topo">↑</button>
+
+<footer style="padding: 60px 20px 30px; text-align: center; background: #050a12;">
+    <div style="margin-bottom: 20px;">
+        <a href="javascript:void(0)" onclick="openModal('modalTermos')" style="color: #555; text-decoration: none; font-size: 0.8rem; margin: 0 15px;">Termos de Uso</a>
+        <a href="javascript:void(0)" onclick="openModal('modalPrivacidade')" style="color: #555; text-decoration: none; font-size: 0.8rem; margin: 0 15px;">Privacidade</a>
+    </div>
+    <p style="font-size: 0.85rem; color: #444;">&copy; 2026 Soberania Biológica - Elite Edition. Todos os direitos reservados.</p>
+</footer>
+
+<div id="modalTermos" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeModal('modalTermos')">&times;</span>
+        <h2 style="font-family: 'Orbitron'; color: #00d4ff; margin-bottom: 15px;">Termos de Uso</h2>
+        <p style="font-size: 0.9rem; line-height: 1.6;"><h4>Soberania Biológica | Elite Edition – Termos e Condições</h4> </br>
+<ul>
+1. Aceitação dos Termos Ao adquirir e acessar o dossiê "Soberania Biológica", você concorda em cumprir estes termos de serviço, todas as leis e regulamentos aplicáveis. Se você não concordar com algum destes termos, está proibido de usar ou acessar este material. </br>
+
+2. Licença de Uso É concedida permissão para baixar uma cópia do material digital para visualização pessoal e não comercial apenas. Esta é a concessão de uma licença, não uma transferência de título e, sob esta licença, você não pode:
+
+Modificar ou copiar os materiais;
+
+Usar os materiais para qualquer finalidade comercial ou para exibição pública;
+
+Tentar descompilar ou fazer engenharia reversa de qualquer software contido no site;
+
+Transferir os materiais para outra pessoa ou 'espelhar' os materiais em qualquer outro servidor.</br>
+
+3. Isenção de Responsabilidade (Aviso Médico)
+
+O conteúdo deste guia é estritamente educativo.
+
+Os protocolos de biohacking, sugestões de suplementação e rotinas não substituem o aconselhamento médico profissional.
+
+Sempre consulte um médico antes de iniciar qualquer protocolo que altere sua dieta, suplementação ou biologia.
+
+Os resultados variam de pessoa para pessoa e dependem da genética e esforço individual.</br>
+
+4. Limitações Em nenhum caso o Soberania Biológica ou seus fornecedores serão responsáveis por quaisquer danos decorrentes do uso ou da incapacidade de usar os materiais.</p></ul>
+    </div>
+</div>
+
+<div id="modalPrivacidade" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeModal('modalPrivacidade')">&times;</span>
+        <h2 style="font-family: 'Orbitron'; color: #00d4ff; margin-bottom: 15px;">Privacidade</h2>
+        <p style="font-size: 0.9rem; line-height: 1.6;"><h4>Soberania Biológica | Elite Edition – Política de Privacidade</h4></br>
+
+Sua privacidade é crítica para nós. É política do Soberania Biológica respeitar a sua privacidade em relação a qualquer informação que possamos coletar.</br></br>
+<ul>
+1. Coleta de Informações Solicitamos informações pessoais apenas quando realmente precisamos delas para lhe fornecer o produto (como nome e e-mail no ato da compra via Kirvano). Fazemo-lo por meios justos e legais, com o seu conhecimento e consentimento.</br>
+
+2. Uso de Dados e Cookies
+
+Pixels de Rastreamento: Utilizamos o Pixel do Facebook e Google Analytics para monitorar conversões e otimizar nossa publicidade. Esses dados são anônimos e usados apenas para marketing.
+
+E-mail Marketing: Seu e-mail será usado para enviar o acesso ao produto e, ocasionalmente, atualizações sobre o protocolo. Você pode cancelar a inscrição a qualquer momento.</br>
+
+3. Retenção e Segurança Apenas retemos as informações coletadas pelo tempo necessário para fornecer o serviço solicitado. Protegemos os dados armazenados dentro de meios comercialmente aceitáveis ​​para evitar perda e roubo, bem como acesso, divulgação, cópia, uso ou modificação não autorizados.</br>
+
+4. Compartilhamento de Dados Não compartilhamos informações de identificação pessoal publicamente ou com terceiros, exceto quando exigido por lei ou pela plataforma de pagamento (Kirvano) para processar sua transação.</br>
+
+5. Compromisso do Usuário O usuário se compromete a fazer uso adequado dos conteúdos e da informação que o Soberania Biológica oferece no site e com caráter enunciativo, mas não limitativo: não se envolver em atividades ilícitas ou contrárias à boa fé e à ordem pública.</p>
+</ul>
+    </div>
+</div>
+
+<div class="floating-control">
+    <button id="backToTop" onclick="window.scrollTo(0,0)" title="Voltar ao topo">↑</button>
+    <div id="accessBadge" class="access-badge">SISTEMA: ACESSO AUTORIZADO</div>
+</div>
+
+
+
+
+
+   
+    <script>
+        function startTimer(duration, display) {
+            var timer = duration, minutes, seconds;
+            setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+                display.textContent = (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
+                if (--timer < 0) timer = duration; 
+            }, 1000);
+        }
+
+        window.onscroll = function() {
+            var btn = document.getElementById("backToTop");
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        };
+
+        window.onload = function () {
+            startTimer(60 * 15, document.querySelector('#timer'));
+        };
+        
+        
+        function startCarouselAutoScroll() {
+    const container = document.querySelector('.carousel-container');
+    let scrollAmount = 0;
+    const scrollStep = 1; // Velocidade do movimento
+    const delay = 30; // Suavidade (ms)
+
+    function step() {
+        // Se o usuário estiver interagindo (mouse em cima), pausa o movimento
+        if (!isPaused) {
+            container.scrollLeft += scrollStep;
+            
+            // Se chegou ao fim, volta suavemente para o início
+            if (container.scrollLeft >= (container.scrollWidth - container.clientWidth)) {
+                container.scrollLeft = 0;
+            }
+        }
+        requestAnimationFrame(step);
+    }
+
+    let isPaused = false;
+    container.addEventListener('mouseenter', () => isPaused = true);
+    container.addEventListener('mouseleave', () => isPaused = false);
+    container.addEventListener('touchstart', () => isPaused = true);
+    container.addEventListener('touchend', () => isPaused = false);
+
+    requestAnimationFrame(step);
+}
+
+// Inicie a função junto com o carregamento da página
+window.addEventListener('load', startCarouselAutoScroll);
+
+
+
+// Lógica do FAQ Acordeão
+document.querySelectorAll('.faq-question').forEach(button => {
+    button.addEventListener('click', () => {
+        const faqItem = button.parentElement;
+        
+        // Fecha outros itens abertos (opcional, para foco único)
+        document.querySelectorAll('.faq-item').forEach(item => {
+            if (item !== faqItem) item.classList.remove('active');
+        });
+
+        faqItem.classList.toggle('active');
+    });
+});
+       
+       
+       function openModal(id) {
+    document.getElementById(id).style.display = "block";
+    document.body.style.overflow = "hidden"; // Trava o scroll da página ao abrir
+}
+
+function closeModal(id) {
+    document.getElementById(id).style.display = "none";
+    document.body.style.overflow = "auto"; // Destrava o scroll
+}
+
+// Fecha o modal se clicar fora da caixa branca
+window.onclick = function(event) {
+    if (event.target.className === 'modal') {
+        event.target.style.display = "none";
+        document.body.style.overflow = "auto";
+    }
+}
+       
+       function openModal(id) {
+    document.getElementById(id).style.display = "block";
+    document.body.style.overflow = "hidden";
+}
+
+function closeModal(id) {
+    document.getElementById(id).style.display = "none";
+    document.body.style.overflow = "auto";
+}
+
+// Fecha modal ao clicar fora dele
+window.onclick = function(event) {
+    if (event.target.className === 'modal') {
+        event.target.style.display = "none";
+        document.body.style.overflow = "auto";
+    }
+}
+
+
+let autoScrollInterval;
+let typingInterval;
+
+function openModal(id) {
+    const modal = document.getElementById(id);
+    const content = modal.querySelector('.modal-content');
+    const titleElement = modal.querySelector('h2');
+    const fullText = titleElement.innerText;
+    
+    // Limpa o título para começar o efeito
+    titleElement.innerText = '';
+    titleElement.classList.add('typewriter-cursor');
+    
+    modal.style.display = "block";
+    document.body.style.overflow = "hidden";
+    content.scrollTop = 0;
+
+    // Inicia efeito de digitação
+    typeWriter(titleElement, fullText, () => {
+        // Após digitar, espera 1s e inicia o scroll automático
+        setTimeout(() => {
+            titleElement.classList.remove('typewriter-cursor');
+            startAutoScroll(content, id);
+        }, 1000);
+    });
+}
+
+function typeWriter(element, text, callback) {
+    let i = 0;
+    clearInterval(typingInterval);
+    
+    typingInterval = setInterval(() => {
+        if (i < text.length) {
+            element.innerText += text.charAt(i);
+            i++;
+        } else {
+            clearInterval(typingInterval);
+            if (callback) callback();
+        }
+    }, 70); // Velocidade da digitação
+}
+
+function startAutoScroll(element, modalId) {
+    clearInterval(autoScrollInterval);
+
+    autoScrollInterval = setInterval(() => {
+        if (element.scrollTop + element.clientHeight >= element.scrollHeight - 1) {
+            clearInterval(autoScrollInterval);
+            
+            // Delay final antes de fechar automaticamente
+            setTimeout(() => {
+                closeModal(modalId);
+            }, 1200); 
+        } else {
+            element.scrollTop += 1; 
+        }
+    }, 45); 
+}
+
+function closeModal(id) {
+    const modal = document.getElementById(id);
+    if(modal) {
+        modal.style.opacity = "0";
+        modal.style.transition = "opacity 0.5s ease";
+        
+        setTimeout(() => {
+            modal.style.display = "none";
+            modal.style.opacity = "1";
+            document.body.style.overflow = "auto";
+            clearInterval(autoScrollInterval);
+            clearInterval(typingInterval);
+
+            // Dispara a notificação de Acesso Autorizado
+            showAccessToast();
+        }, 500);
+    }
+}
+
+function showAccessToast() {
+    const toast = document.getElementById('accessToast');
+    toast.classList.add('show');
+
+    // Esconde a notificação após 3 segundos
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 3000);
+
+}
+
+
+function acceptCookie() {
+    // Salva apenas para a sessão atual
+    sessionStorage.setItem('elite_cookie_session', 'granted');
+    closeCookieBanner();
+}
+
+function closeCookieBanner() {
+    document.getElementById('cookie-alert-system').classList.remove('active');
+}
+
+window.addEventListener('load', () => {
+    // Verifica se já aceitou NESTA SESSÃO (aba aberta)
+    const alreadyAccepted = sessionStorage.getItem('elite_cookie_session');
+
+    if (!alreadyAccepted) {
+        setTimeout(() => {
+            const banner = document.getElementById('cookie-alert-system');
+            if(banner) banner.classList.add('active');
+        }, 2000); // 2 segundos para aparecer
+    }
+});
+         
+    </script>
+    
+    
+</div>
+
+
+</body>
+</html>
